@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>ksm - osu!gaming CTF 2025 - Write-Ups</title>
+		<meta property="og:title" content="ksm - osu!gaming CTF 2025 - Write-Ups">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/src/assets/images/osu-gaming-ctf-2025-banner.png">
+		<meta property="og:url" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/ksm/">
+		<meta property="og:description" content="CTF write ups!">
+        <link rel="stylesheet" href="https://mariochao.github.io/src/style-no-hover.css">
+		<link rel="stylesheet" href="https://mariochao.github.io/dream-game/src/assets/styles/navigation-bar.css">
+		<link rel="icon" href="">
+	</head>
+	<body class="navbar-body" style="font-family: 'PT Serif'; background-color: lightgoldenrodyellow;">
+		<!-- Navigation bar -->
+		<div class="navbar" style="text-align: center; background-color: #FEEAAA;">
+			<h1>
+				<a href="../../../">Capture The Flags</a>
+				/ <a href="../../">Write-Ups</a>
+				/ <a href="../">osu!gaming CTF 2025</a>
+				/ ksm
+			</h1>
+		</div>
+		<!-- Body -->
+		<div id="real-body">
+            <div style="display: flex; justify-content: center;">
+				<div style="width: 100%; max-width: 770px;">
+					<div style="background-color: #FEEAAA; border-radius: 3px; padding: 8px 16px;">
+						<p>This map is pretty cool... but I hear the latest version is better.</p>
+						<p>
+							Downloads<br>
+							<a href="https://osuctf25-challenges.storage.googleapis.com/uploads/b8f64705f5a0eb20c428ae3dccafa734e82543c8a7fffdcca2bba1be81f8f19b/rhythm_ksh.tar.gz">rhythm_ksh.tar.gz</a>
+						</p>
+					</div>
+					<div>
+						<p>First, unzip <code>rhythm_ksh.tar.gz</code>.</p>
+						<ul>
+							<li>
+								We'll find <code>harumachialigned.ksh</code>, a <a href="https://www.kshootmania.com/en/">K-Shoot Mania</a> chart file
+								for the song "Harumachi Clover".
+							</li>
+						</ul>
+						<p>The challenge description mentioned about the "latest" version of the map.</p>
+						<ul>
+							<li>To search for K-Shoot Mania maps, we can use <a href="https://ksm.dev/">Nautica</a> (ksm.dev).</li>
+							<li>
+								On the website, search for the song "Harumachia Clover".
+								We'll find <a href="https://ksm.dev/songs/6e1f4180-a7c0-11f0-a7a9-0b179b1c9a1b">this chart</a> by Quintec.
+							</li>
+							<img src="../src/assets/images/ksm-chart-page.png" width="100%">
+							<li>The uploader description contains part of the flag.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+								osu{f4iry_d4nc1ng_
+							</div>
+						</ul>
+						<p>To find the other part of the flag, download the chart from Nautica.</p>
+						<ul>
+							<li>Unzip and view the new <code>harumachialigned.ksh</code> file.</li>
+							<li>This file contains another part of the flag.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+								illustrator=in_l4k3_eeeeee}
+							</div>
+						</ul>
+						<p>Combining the two parts, we got the flag for rhythm/ksm.</p>
+						<p>Flag: <code>osu{f4iry_d4nc1ng_in_l4k3_eeeeee}</code></p>
+					</div>
+				</div>
+            </div>
+		</div>
+	</body>
+</html>

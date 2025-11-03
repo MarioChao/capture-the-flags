@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>lunatic-ksm - osu!gaming CTF 2025 - Write-Ups</title>
+		<meta property="og:title" content="lunatic-ksm - osu!gaming CTF 2025 - Write-Ups">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/src/assets/images/osu-gaming-ctf-2025-banner.png">
+		<meta property="og:url" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/lunatic-ksm/">
+		<meta property="og:description" content="CTF write ups!">
+        <link rel="stylesheet" href="https://mariochao.github.io/src/style-no-hover.css">
+		<link rel="stylesheet" href="https://mariochao.github.io/dream-game/src/assets/styles/navigation-bar.css">
+		<link rel="icon" href="">
+	</head>
+	<body class="navbar-body" style="font-family: 'PT Serif'; background-color: lightgoldenrodyellow;">
+		<!-- Navigation bar -->
+		<div class="navbar" style="text-align: center; background-color: #FEEAAA;">
+			<h1>
+				<a href="../../../">Capture The Flags</a>
+				/ <a href="../../">Write-Ups</a>
+				/ <a href="../">osu!gaming CTF 2025</a>
+				/ lunatic-ksm
+			</h1>
+		</div>
+		<!-- Body -->
+		<div id="real-body">
+            <div style="display: flex; justify-content: center;">
+				<div style="width: 100%; max-width: 770px;">
+					<div style="background-color: #FEEAAA; border-radius: 3px; padding: 8px 16px;">
+						<p>There's a reason why the term "illegal pattern" exists.</p>
+						<p><a href=https://docs.google.com/spreadsheets/d/13KWwfk0_gyNdVad-8Bhy7F1r2mYRSykh9vC0qx6fSkM/edit?usp=sharing">発狂KSM os/us難易度表 (v5.0)</a></p>
+						<p>Make sure to submit flag content in uppercase, like this: <code>osu{HELLO_WORLD}</code></p>
+						<p>
+							Downloads<br>
+							<a href="https://osuctf25-challenges.storage.googleapis.com/uploads/d11641404ffe718a10b10d2487cfb5c2b5733477910695733afc6f2757e3c5b5/rhythm_lunatic-ksm.tar.gz">rhythm_lunatic-ksh.tar.gz</a>
+						</p>
+					</div>
+					<div>
+						<p>The zip contains a <a href="https://www.kshootmania.com/en/">K-Shoot Mania</a> chart.</a></p>
+						<ul>
+							<li>
+								If we search up impossible patterns in KSM, we'll find
+								<a href="https://www.sdvx.org/en/compendium/insane-ksm">this page</a> from the Sound Voltex wiki.
+							</li>
+							<li>
+								The page has a link to
+								<a href="https://drive.google.com/drive/folders/1GQlJTYWjgXSJoA4SwbcASRk00xKXVAqw">this Google Drive</a>
+								with files for all insane KSM maps.
+							</li>
+							<li>
+								Navigate to <a href="https://drive.google.com/drive/folders/1aq0PKyga8AXKn8aUH5H2eLeZNjpHO00k">the map</a>
+								corresponding to the map from the challenge.
+							</li>
+						</ul>
+						<p>Compare <code>4_in.ksh</code> in the drive with the <code>4_in.ksh</code> from the challenge:</p>
+						<ul>
+							<li>We'll find that the challenge map has extra content near the end.</li>
+							<img src="../src/assets/images/lunatic-ksm-file-compare.png" width="100%">
+							<li>
+								Using a ksm beatmap viewer like <a href="https://viewksm.dev/">viewksm.dev</a>
+								or <a href="https://github.com/rhythm-gaming/kshoot-tools">kshoot-tools</a>,
+								we can find out what's at the end of the map.
+							</li>
+							<div style="height: auto; max-height: 200px; overflow: auto;">
+								<img src="../src/assets/images/lunatic-ksm-flag.png" width="10%">
+							</div>
+							<p style="font-size: small;">
+								Using kshoot-tools:<br>
+								<code>kshoot 4_in.ksh render -m=171 --pulses_per_column=7000 -c=1</code>
+							</p>
+							<li>The chart spells out the flag.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+								osu{KONASUTE_IS_A_SCAM}
+							</div>
+						</ul>
+						<p>Thus, we acquired the flag for rhythm/lunatic-ksm.</p>
+						<p>Flag: <code>osu{KONASUTE_IS_A_SCAM}</code></p>
+					</div>
+				</div>
+            </div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>blue-zenith - osu!gaming CTF 2025 - Write-Ups</title>
+		<meta property="og:title" content="blue-zenith - osu!gaming CTF 2025 - Write-Ups">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/src/assets/images/osu-gaming-ctf-2025-banner.png">
+		<meta property="og:url" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/blue-zenith/">
+		<meta property="og:description" content="CTF write ups!">
+        <link rel="stylesheet" href="https://mariochao.github.io/src/style-no-hover.css">
+		<link rel="stylesheet" href="https://mariochao.github.io/dream-game/src/assets/styles/navigation-bar.css">
+		<link rel="icon" href="">
+	</head>
+	<body class="navbar-body" style="font-family: 'PT Serif'; background-color: lightgoldenrodyellow;">
+		<!-- Navigation bar -->
+		<div class="navbar" style="text-align: center; background-color: #FEEAAA;">
+			<h1>
+				<a href="../../../">Capture The Flags</a>
+				/ <a href="../../">Write-Ups</a>
+				/ <a href="../">osu!gaming CTF 2025</a>
+				/ blue-zenith
+			</h1>
+		</div>
+		<!-- Body -->
+		<div id="real-body">
+            <div style="display: flex; justify-content: center;">
+				<div style="width: 100%; max-width: 770px;">
+					<div style="background-color: #FEEAAA; border-radius: 3px; padding: 8px 16px;">
+						<p>WHEN YOU SEE IT!!! (or don't).</p>
+						<p><a href="https://blue-zenith-web.challs.sekai.team">https://blue-zenith-web.challs.sekai.team</a></p>
+					</div>
+					<div>
+						<p style="font-size: small;">Since I don't have images of the challenge, this is my attempt at recreating the scene of the website.</p>
+						<div style="background-image: url(../src/assets/images/blue-zenith-bg.jpg); background-size: cover; height: 400px; display: flex; justify-content: center; align-items: center;">
+							<div style="background-color: #FFFFFFCF; width: 50%; height: 60%; display: flex; align-items: center; flex-direction: column; border-radius: 10px;">
+								<div style="margin: auto; text-align: center;">
+									<p style="color: blue; font-size: large; font-weight: bold;">Blue Zenith</p>
+									<p>
+										<label for="username">Username:</label><br>
+										<input type="text" id="username" placeholder="admin" readonly size="15" style="text-align: center;" required>
+									</p>
+									<p>
+										<label for="password">Password:</label><br>
+										<input type="password" id="password" placeholder="••••••••" size="15" readonly style="text-align: center;" required>
+									</p>
+									<button style="background-color: transparent; border-color: blue; border-radius: 3px;">Log in</button>
+								</div>
+							</div>
+						</div>
+						<p>First, let's try logging in.</p>
+						<ul>
+							<li>
+								If we input normal letters for <code>username</code> and <code>password</code>, we get a
+								<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401">401 Unauthorized</a> response.
+							</li>
+							<li>
+								If we input a single quote "<code>'</code>" for <code>username</code>, we get a
+								<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/500">500 Internal Server Error</a> response.
+							</li>
+							<li>Inputting anything for <code>password</code> doesn't seem to cause the error response.</li>
+						</ul>
+						<p>
+							From that, we can tell that there's a
+							<a href="https://en.wikipedia.org/wiki/SQL_injection#Blind_SQL_injection">blind SQL injection</a>
+							vulnerability in the <code>admin</code> field.
+						</p>
+						<ul>
+							<li>This is also referenced by the challenge description.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+								WHEN YOU SEE IT!!! (or don't).
+							</div>
+							<li>
+								While we can use <a href="https://sqlmap.org/">sqlmap</a> to automate the SQL injections,
+								I wrote my own solving scripts in Javascript.
+							</li>
+						</ul>
+						<p>Next, we'll determine the type of the database (the DBMS).</p>
+						<ul>
+							<li>
+								I probably got lucky by first checking if it's an <a href="https://sqlite.org/">SQLite</a> database.
+								<ol>
+									<li>Use the UNION operator to determine the number of values selected through the <code>admin</code> field.</li>
+									<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+										<code>' UNION SELECT 0, 0, 0 --</code>
+									</div>
+									<p style="font-size: small;">
+										Explanation:<br>
+										If we union select the same number of values, the response will be 401 Unauthorized.<br>
+										If we union select a different number of values, the response will be 500 Internal Server Error.
+									</p>
+									<li>Select from <code><a href="https://www.sqlite.org/schematab.html">sqlite_schema</a></code>.</li>
+									<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+										<code>' UNION SELECT 0, 0, 0 FROM sqlite_schema --</code>
+									</div>
+									<p style="font-size: small;">
+										Since this returns 401 Unauthorized, we have identified that the database type is SQLite.
+									</p>
+									<img src="../src/assets/images/sqlite-logo.png" width="32%">
+								</ol>
+							</li>
+							<li>
+								Refer to
+								<a href="https://swisskyrepo.github.io/PayloadsAllTheThings/SQL%20Injection/#dbms-identification">swisskyrepo's PayloadsAllTheThings</a>
+								for several other methods to identify the database.
+							</li>
+						</ul>
+						<p>
+							Now, we can extract the database using
+							<a href="https://swisskyrepo.github.io/PayloadsAllTheThings/SQL%20Injection/SQLite%20Injection/#sqlite-error-based">error-based SQLite injection</a>.
+						</p>
+						<ul>
+							<li>This is the general payload we will use.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+								<code>' OR CASE WHEN [BOOLEAN_QUERY] THEN 1 ELSE load_extension(1) END --</code>
+							</div>
+							<p style="font-size: small;">
+								When [BOOLEAN_QUERY] is true, the response is 401 Unauthorized.<br>
+								When [BOOLEAN_QUERY] is false, the response is 500 Internal Server Error.
+							</p>
+							<li>We'll use this boolean query to determine a table's content character-by-character.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center; font-size: small;">
+								<code>(SUBSTRING((SELECT ${column_name} FROM ${tbl_name} LIMIT 1 OFFSET ${row_index}), ${char_index}, 1) >= '${char}')</code>
+							</div>
+							<p style="font-size: small;">
+								Explanation:<br>
+								It gets the string at the given table name, column name, and row index,<br>
+								extracts the character at the given index of the string,<br>
+								then checks if it is greater than the given character.
+							</p>
+							<li>First, extract column <code>sql</code>, row <code>0</code> from table <code>sqlite_schema</code>.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center; font-size: small;">
+								CREATE TABLE users id INTEGER PRIMARY KEY AUTOINCREMENT username TEXT UNIQUE NOT NULL password TEXT NOT NULL
+							</div>
+							<li>Next, extract column <code>user</code>, row <code>0</code> from table <code>users</code>. This gives us a username.</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+								admin
+							</div>
+							<li>Then, extract column <code>password</code>, row <code>0</code> from table <code>users</code>. This gives us the password (flag).</li>
+							<div style="background-color: #FEEAAA; padding: 8px; text-align: center;">
+								osu{wh3n_u_d0nt_s33_1t}
+							</div>
+						</ul>
+						<p>
+							Logging in with the username and password we found,
+							we'll be redirected to <a href="https://youtu.be/UYNpkDrCWtA">this osu! video</a> where
+							<a href="https://osu.ppy.sh/users/124493">Cookiezi</a> gets 727pp on "Blue Zenith".
+						</p>
+						<p>As a result, we found the flag for web/blue-zenith.</p>
+						<p>Flag: <code>osu{wh3n_u_d0nt_s33_1t}</code></p>
+					</div>
+				</div>
+            </div>
+		</div>
+	</body>
+</html>

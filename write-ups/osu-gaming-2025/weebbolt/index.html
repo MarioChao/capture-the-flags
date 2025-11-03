@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>weebbolt - osu!gaming CTF 2025 - Write-Ups</title>
+		<meta property="og:title" content="weebbolt - osu!gaming CTF 2025 - Write-Ups">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/src/assets/images/osu-gaming-ctf-2025-banner.png">
+		<meta property="og:url" content="https://mariochao.github.io/capture-the-flags/write-ups/osu-gaming-2025/weebbolt/">
+		<meta property="og:description" content="CTF write ups!">
+        <link rel="stylesheet" href="https://mariochao.github.io/src/style-no-hover.css">
+		<link rel="stylesheet" href="https://mariochao.github.io/dream-game/src/assets/styles/navigation-bar.css">
+		<link rel="icon" href="">
+	</head>
+	<body class="navbar-body" style="font-family: 'PT Serif'; background-color: lightgoldenrodyellow;">
+		<!-- Navigation bar -->
+		<div class="navbar" style="text-align: center; background-color: #FEEAAA;">
+			<h1>
+				<a href="../../../">Capture The Flags</a>
+				/ <a href="../../">Write-Ups</a>
+				/ <a href="../">osu!gaming CTF 2025</a>
+				/ weebbolt
+			</h1>
+		</div>
+		<!-- Body -->
+		<div id="real-body">
+            <div style="display: flex; justify-content: center;">
+				<div style="width: 100%; max-width: 770px;">
+					<div style="background-color: #FEEAAA; border-radius: 3px; padding: 8px 16px;">
+						<p>This challenge is a lot more fun when you're a weeb.</p>
+						<p><a href="https://weebbolt-web.challs.sekai.team">https://weebbolt-web.challs.sekai.team</a></p>
+					</div>
+					<div>
+						<p>
+							Basically a <a href="https://en.wikipedia.org/wiki/GeoGuessr">GeoGuessr</a> / OSINT
+							where we have to find 9 out of 10 locations from Google Maps images.
+						</p>
+						<ul>
+							<li>
+								Before I worked on this, my team <a href="https://ctftime.org/team/11464/">b01lers</a>
+								already found 6 of the locations.
+							</li>
+							<ul>
+								<li>However, I still gotta input them one by one on my computer.</li>
+							</ul>
+							<li>The 3 locations I found were <em>technology</em>, <em>bench</em>, and <em>punchdrunk</em>.</li>
+							<li>The location that we skipped was <em>pumpitup</em>.</li>
+						</ul>
+						<p>How I search for the places:</p>
+						<ol>
+							<li>Use <a href="https://lens.google/">Google Lens</a> to reverse image search on special features of the image.</li>
+							<li>Go to "Visual matches" & look for correct results.</li>
+							<li>Find the corresponding places on <a href="https://www.google.com/maps">Google Maps</a>.</li>
+						</ol>
+						<details>
+							<summary>The 9 locations we found</summary>
+							<table style="text-align: center; margin: 0px auto;">
+								<tr>
+									<th>Title</th>
+									<th>Solved Location</th>
+									<th>Google Maps</th>
+								</tr>
+								<tr>
+									<td>roe</td>
+									<td><img src="../src/assets/images/weebbolt/roe.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/59%C2%B055'34.8%22N+10%C2%B042'11.1%22E/">
+										59.9263342, 10.7030935
+									</a></td>
+								</tr>
+								<tr>
+									<td>ongaku</td>
+									<td><img src="../src/assets/images/weebbolt/ongaku.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/59%C2%B019'26.8%22N+18%C2%B004'23.9%22E/">
+										59.3240967, 18.0732994
+									</a></td>
+								</tr>
+								<tr>
+									<td>loner</td>
+									<td><img src="../src/assets/images/weebbolt/loner.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/35%C2%B039'41.4%22N+139%C2%B040'10.2%22E/">
+										35.6615015, 139.6694974
+									</a></td>
+								</tr>
+								<tr>
+									<td>cafe</td>
+									<td><img src="../src/assets/images/weebbolt/cafe.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/33%C2%B042'47.8%22N+115%C2%B024'12.2%22W/">
+										33.7133345, -115.4033715
+									</a></td>
+								</tr>
+								<tr>
+									<td>diary</td>
+									<td><img src="../src/assets/images/weebbolt/diary.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/57%C2%B038'47.5%22N+18%C2%B017'47.9%22E/">
+										57.6465181, 18.2966485
+									</a></td>
+								</tr>
+								<tr>
+									<td>ghost</td>
+									<td><img src="../src/assets/images/weebbolt/ghost.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/34%C2%B049'38.8%22N+131%C2%B059'20.5%22E/">
+										34.8274322, 131.9890578
+									</a></td>
+								</tr>
+								<tr>
+									<td>technology</td>
+									<td><img src="../src/assets/images/weebbolt/technology.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/32%C2%B059'19.9%22N+129%C2%B046'59.4%22E/">
+										32.9888675, 129.7831613
+									</a></td>
+								</tr>
+								<tr>
+									<td>bench</td>
+									<td><img src="../src/assets/images/weebbolt/bench.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/34%C2%B053'22.4%22N+135%C2%B048'30.3%22E/">
+										34.8895523, 135.8084066
+									</a></td>
+								</tr>
+								<tr>
+									<td>punchdrunk</td>
+									<td><img src="../src/assets/images/weebbolt/punchdrunk.png" style="width: 20vw; max-width: 300px;"></td>
+									<td><a href="https://www.google.com/maps/place/51%C2%B042'00.9%22N+5%C2%B017'34.5%22E/">
+										51.7002551, 5.2929103
+									</a></td>
+								</tr>
+							</table>
+						</details>
+						<p>Once we solved 9 / 10 locations, we are given the flag for osint/weebbolt.</p>
+						<p>Flag: <code>osu{https://i.ibb.co/xTx6Nns/image.png}</code></p>
+					</div>
+				</div>
+            </div>
+		</div>
+	</body>
+</html>
